@@ -1,7 +1,6 @@
 import employees from './employees.js'
 
-// console.log(employees)
-
+const employeesHeading = document.getElementById('employees-heading')
 const employeesContainer = document.getElementById('employees-container')
 const selectMenu = document.getElementById('select-menu')
 const searchField = document.getElementById('search-field')
@@ -31,6 +30,8 @@ getEmployeesHtml(employees)
 
 
 //----- Filter employees using select menu/search field -----//
+let targetTeam
+
 function filterEmployeesByTeam() {
     employeesHtml = ''
     employeesContainer.innerHTML = ''
@@ -40,7 +41,7 @@ function filterEmployeesByTeam() {
         return item === selectMenu.value
     })
     
-    const targetTeam = employees.filter(item => {
+    targetTeam = employees.filter(item => {
         if (item.team === selectedTeam[0]) {
             return item
         }
@@ -57,7 +58,7 @@ function filterEmployeesByName() {
     employeesContainer.innerHTML = ''
     const searchValue = searchField.value.toLowerCase()
 
-    const targetEmployees = employees.map(item => {
+    const targetEmployees = targetTeam.map(item => {
         if (item.name.toLowerCase().includes(searchValue)) {
             return item
         }
@@ -71,8 +72,6 @@ function filterEmployeesByName() {
 
 function getEmployeesHtml(teamMembers) {
     teamMembers.map(item => {   
-        console.log(item.social)
-        console.log(item.image)
         
         const socialHtml = item.social.map(social => {
             return `
@@ -83,8 +82,8 @@ function getEmployeesHtml(teamMembers) {
         employeesHtml += `
             <div class="employee-card">
                 <img src="../images/photos/${item.image}" class="employee__img" alt="${item.name}">
-                <h2 class="employee__name">${item.name}</h2>
-                <h3 class="employee__title">${item.title}</h3>
+                <h3 class="employee__name">${item.name}</h3>
+                <h4 class="employee__title">${item.title}</h4>
                 <p class="employee__bio">${item.bio}</p>
                 <div class="employee__social-wrapper">${socialHtml}</div>
             </div>
@@ -95,6 +94,9 @@ function getEmployeesHtml(teamMembers) {
 
 
 function renderEmployees() {
+    console.log(selectMenu.value)
+    employeesHeading.textContent = selectMenu.value ? 
+        `Team: ${selectMenu.value.charAt(0).toUpperCase() + selectMenu.value.slice(1)}` : 'All employees'
     employeesContainer.innerHTML = employeesHtml
 }
 

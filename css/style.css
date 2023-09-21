@@ -93,6 +93,7 @@ header {
     font-family: 'Inter', sans-serif;
     background-color: #fff;
     border: 2px solid #fff;
+    border-radius: .3em;
     box-shadow: 0 3px 16px #000000B3;
     outline-color: #319E97;
     box-sizing: border-box;
@@ -102,9 +103,10 @@ header {
 .select-menu {
     padding: .5em .75em;
     cursor: pointer;
+    border-radius: .3em;
     -moz-appearance: none;
     -webkit-appearance: none;
-    -webkit-border-radius: 0px;
+    -webkit-border-radius: .3em;
     appearance: none;
     background: #fff url('../images/icons/vector.png');
     background-repeat: no-repeat;

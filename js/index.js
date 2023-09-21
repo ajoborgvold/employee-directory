@@ -30,9 +30,10 @@ getEmployeesHtml(employees)
 
 
 //----- Filter employees using select menu/search field -----//
-let targetTeam
+let targetTeam = employees
 
 function filterEmployeesByTeam() {
+    searchField.value = ''
     employeesHtml = ''
     employeesContainer.innerHTML = ''
     const allTeams = employees.map(item => item.team)
